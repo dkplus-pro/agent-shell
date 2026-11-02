@@ -520,7 +520,7 @@ type Limits = {
 | --- | --- | --- |
 | Node.js | 24.x（≥24.10） | 本机实测 24.12.0 |
 | pnpm | 12.16.1 | workspace |
-| TypeScript | 7.0.2 | 阶段 0 验证工具链兼容性；不兼容则回退 6.0.x |
+| TypeScript | 6.0.3 | 阶段 0 实测：`typescript-eslint@8.72.1` 要求 `typescript >=4.8.4 <6.1.0`，TS 7.0.2 无法与 lint 工具链共存（npm 直接拒绝安装），按本节预案回退 6.0.x；见 [docs/phases/00-contracts.md](./phases/00-contracts.md) |
 | @langchain/langgraph | 1.6.0 | 主运行时 |
 | @langchain/core | 1.3.2 | 消息/模型/工具基类 |
 | @langchain/openai | 1.8.0 | OpenAI 兼容 provider |

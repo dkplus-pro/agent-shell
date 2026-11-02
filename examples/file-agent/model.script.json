@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "steps": [
+    {
+      "toolCalls": [
+        {
+          "name": "read_file",
+          "args": { "path": "notes/a.md" },
+          "id": "act1_read_a"
+        }
+      ],
+      "usage": { "inputTokens": 120, "outputTokens": 12, "totalTokens": 132 }
+    },
+    {
+      "content": "notes/a.md 的内容是 hello world。",
+      "usage": { "inputTokens": 168, "outputTokens": 18, "totalTokens": 186 }
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "plugin__word_count__word_count",
+          "args": { "path": "notes/a.md" },
+          "id": "act2_word_count"
+        }
+      ]
+    },
+    {
+      "content": "notes/a.md 共 2 个词：hello world。"
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "mcp__echo__echo",
+          "args": { "text": "hello from mcp" },
+          "id": "act3_echo"
+        }
+      ]
+    },
+    {
+      "content": "MCP echo 原样返回：hello from mcp。"
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "write_file",
+          "args": {
+            "path": "notes/summary.md",
+            "content": "# Summary\n\nnotes/a.md 说 hello world，notes/b.md 说 agent shell。\n"
+          },
+          "id": "act4_write_summary"
+        }
+      ]
+    },
+    {
+      "content": "已写入 notes/summary.md。"
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "run_shell",
+          "args": { "command": "echo hello" },
+          "id": "act5_echo_hello"
+        }
+      ]
+    },
+    {
+      "content": "run_shell 输出：hello。"
+    },
+    {
+      "toolCalls": [
+        {
+          "name": "runtime__spawn_subagent",
+          "args": {
+            "task": "读取 notes/b.md，并用一句话给出文件内容的结论。",
+            "agent": "researcher",
+            "context": "验收场景 Act 6：父 agent 只把任务交给只读的 researcher。"
+          },
+          "id": "act6_spawn_researcher"
+        }
+      ]
+    },
+    {
+      "agent": "researcher",
+      "toolCalls": [
+        {
+          "name": "read_file",
+          "args": { "path": "notes/b.md" },
+          "id": "act6_child_read_b"
+        }
+      ]
+    },
+    {
+      "agent": "researcher",
+      "content": "notes/b.md 的内容是 agent shell。"
+    },
+    {
+      "content": "子 agent 结论：notes/b.md 的内容是 agent shell。",
+      "usage": { "inputTokens": 240, "outputTokens": 20, "totalTokens": 260 }
+    },
+    {
+      "content": "总结：notes/a.md 说 hello world，notes/b.md 说 agent shell。",
+      "streamChunks": [
+        "总结：",
+        "notes/a.md ",
+        "说 hello world",
+        "，notes/b.md ",
+        "说 agent shell。"
+      ],
+      "usage": { "inputTokens": 300, "outputTokens": 24, "totalTokens": 324 }
+    }
+  ]
+}

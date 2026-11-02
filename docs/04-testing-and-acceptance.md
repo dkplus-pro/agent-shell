@@ -141,6 +141,8 @@
 
 ### 3.5 Live smoke（手动）
 
+> 步骤手册、通过标准与记录格式见 [live-smoke.md](./live-smoke.md)。
+
 - 前置：`OPENAI_API_KEY`、可选 `OPENAI_BASE_URL`、`ANTHROPIC_API_KEY`。
 - 步骤：
   1. `agent-shell doctor --probe`；

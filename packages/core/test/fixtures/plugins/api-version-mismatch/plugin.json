@@ -1,0 +1,7 @@
+{
+  "name": "api-version-mismatch",
+  "version": "1.0.0",
+  "apiVersion": "0.9.0",
+  "entry": "entry.mjs",
+  "description": "Declares an apiVersion the shell does not provide."
+}

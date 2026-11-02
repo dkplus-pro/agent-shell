@@ -1,0 +1,18 @@
+{
+  "name": "@agent-shell/example-file-agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Reference scenario: local file assistant (the only business code in the repo)",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@agent-shell/core": "workspace:*",
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3"
+  }
+}

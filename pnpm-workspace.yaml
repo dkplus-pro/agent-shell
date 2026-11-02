@@ -1,0 +1,19 @@
+packages:
+  - "packages/*"
+  - "examples/*"
+  - "tooling/*"
+
+strictPeerDependencies: false
+autoInstallPeers: false
+
+# Supply-chain rule (AGENT.md §5): dependency lifecycle scripts stay off by
+# default; only allowlisted packages may run install-time builds.
+enablePrePostScripts: false
+minimumReleaseAgeExclude:
+  - "@vitest/coverage-v8@5.1.0"
+  - "@vitest/mocker@5.1.0"
+  - "@vitest/spy@5.1.0"
+  - vitest@5.1.0
+allowBuilds:
+  better-sqlite3: true
+  esbuild: true

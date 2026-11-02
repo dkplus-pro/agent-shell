@@ -1,0 +1,7 @@
+{
+  "name": "throwing-entry",
+  "version": "1.0.0",
+  "apiVersion": "1.0.0",
+  "entry": "entry.mjs",
+  "description": "Its factory rejects, so the loader must record one failure."
+}

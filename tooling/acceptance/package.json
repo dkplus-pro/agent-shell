@@ -1,0 +1,17 @@
+{
+  "name": "@agent-shell/acceptance",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Offline end-to-end acceptance runner (pnpm acceptance)",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@agent-shell/core": "workspace:*",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3"
+  }
+}

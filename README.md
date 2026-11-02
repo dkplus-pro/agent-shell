@@ -4,8 +4,8 @@
 
 ## 状态
 
-**设计冻结，尚未开始实现。**  
-下一步：阶段 0（契约与骨架），见 [docs/02-roadmap.md](./docs/02-roadmap.md)。
+**v0.1.0 已实现**：阶段 0–7 完成，离线验收通过（`pnpm acceptance`，无需 API key、不访问外网）。  
+规范见 [AGENT.md](./AGENT.md)，阶段与门禁见 [docs/02-roadmap.md](./docs/02-roadmap.md)，验收剧本见 [docs/04-testing-and-acceptance.md](./docs/04-testing-and-acceptance.md)。真实 Provider 的手动 live smoke 尚未执行，手册见 [docs/live-smoke.md](./docs/live-smoke.md)。
 
 ## 这是什么
 
@@ -30,6 +30,7 @@
 | [docs/02-roadmap.md](./docs/02-roadmap.md) | 8 个内部阶段、依赖、门禁、首期 DoD |
 | [docs/03-cli-and-trace.md](./docs/03-cli-and-trace.md) | CLI 命令、审批交互、事件 schema v1、trace 规范 |
 | [docs/04-testing-and-acceptance.md](./docs/04-testing-and-acceptance.md) | 测试分层、单一端到端剧本、CI 门禁、live smoke |
+| [docs/live-smoke.md](./docs/live-smoke.md) | 真实 Provider 手动验收手册与记录格式 |
 | [docs/decisions/](./docs/decisions/) | 8 条 ADR 决策记录 |
 
 ## 关键决策
@@ -45,9 +46,14 @@
 
 完整理由见 [docs/decisions/](./docs/decisions/)。
 
-## 计划中的用法
+## 用法
 
-> 以下命令尚未实现，仅表示目标形态；不要在当前仓库直接运行。
+先准备配置（组合根）`agent-shell.config.ts`，密钥只放环境变量。
+
+```bash
+pnpm install
+pnpm build       # tsc 产出 dist，bin/agent-shell.js 依赖它
+```
 
 ```bash
 # 诊断
@@ -63,7 +69,7 @@ agent-shell chat
 agent-shell trace show <run-id>
 ```
 
-配置组合根（计划）：
+配置组合根：
 
 ```ts
 // agent-shell.config.ts
@@ -85,15 +91,27 @@ export default defineConfig({
 });
 ```
 
-## 计划目录
+## 目录
 
 ```text
 packages/core     运行时内核（无业务）
-packages/cli      CLI
-examples/         无业务参考场景（file-agent）、示例插件、示例 MCP server
-docs/             设计文档与 ADR
+packages/cli      CLI（bin/agent-shell.js）
+examples/         无业务参考场景（file-agent）与示例插件、示例 MCP server
+tooling/          离线验收 runner
+docs/             设计文档、ADR、阶段记录
 ```
+
+## 命令
+
+| 命令 | 作用 |
+| --- | --- |
+| `agent-shell doctor` | 配置/密钥/插件/MCP 诊断（`--probe` 才会真实调用模型） |
+| `agent-shell run "<任务>"` | 单次执行，支持 `--preset`、`--provider`、`--json`、`--quiet`、`--script` |
+| `agent-shell chat` | REPL（`/provider`、`/tools`、`/trace`、`/sessions` 等） |
+| `agent-shell trace list / show / tail` | 事件流回放（`--json` 输出 NDJSON） |
+| `agent-shell tools / plugins / mcp / providers / sessions` | 查看与恢复 |
+| `pnpm acceptance` | 阶段 7 的单一离线剧本（12 个 Act + 安全/架构断言） |
 
 ## 贡献
 
-先读 [AGENT.md](./AGENT.md)，再按阶段推进。当前处于设计冻结期，不接受跳过阶段 0 的实现提交。
+先读 [AGENT.md](./AGENT.md)，再按阶段推进；契约变更必须升版本并写 ADR。

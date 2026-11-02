@@ -1,0 +1,7 @@
+{
+  "name": "traversal-entry",
+  "version": "1.0.0",
+  "apiVersion": "1.0.0",
+  "entry": "../escape.mjs",
+  "description": "Tries to load code from outside its own plugin directory."
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "version": 1,
+    "provider": "openai:fake",
+    "preset": "single",
+    "turns": [
+      { "input": "读取 notes/a.md 并总结", "expect": { "contains": "hello" } },
+      { "input": "用 word_count 插件统计 notes/a.md 的词数", "expect": { "contains": "2 个词" } },
+      { "input": "调用 MCP echo 回显 hello from mcp", "expect": { "contains": "hello from mcp" } },
+      { "input": "把结论写入 notes/summary.md", "expect": { "contains": "notes/summary.md" } },
+      { "input": "运行 run_shell echo hello", "expect": { "contains": "hello" } },
+      {
+        "input": "spawn researcher 读取 notes/b.md 并给出结论",
+        "expect": { "contains": "agent shell" }
+      }
+    ],
+    "approvals": [
+      { "tool": "write_file", "decision": "approve" },
+      {
+        "tool": "run_shell",
+        "decision": "approve",
+        "confirmation": "run",
+        "argsMatch": { "command": "echo hello" },
+        "occurrence": 1
+      }
+    ]
+  },
+  {
+    "version": 1,
+    "provider": "anthropic:fake",
+    "preset": "single",
+    "turns": [
+      { "input": "切换到 anthropic:fake 后总结两个文件", "expect": { "contains": "hello world" } }
+    ],
+    "approvals": []
+  },
+  {
+    "version": 1,
+    "provider": "openai:fake",
+    "preset": "team",
+    "turns": [{ "input": "总结两个文件", "expect": { "contains": "agent shell" } }],
+    "approvals": []
+  },
+  {
+    "version": 1,
+    "provider": "openai:fake",
+    "preset": "swarm",
+    "turns": [
+      { "input": "先研究 notes/a.md", "expect": { "contains": "hello" } },
+      { "input": "再写一段摘要", "expect": { "contains": "agent shell" } }
+    ],
+    "approvals": []
+  },
+  {
+    "version": 1,
+    "provider": "openai:fake",
+    "preset": "single",
+    "turns": [
+      {
+        "input": "恢复会话后回答：notes/b.md 里写了什么？",
+        "expect": { "contains": "agent shell" }
+      }
+    ],
+    "approvals": []
+  },
+  {
+    "version": 1,
+    "provider": "openai:fake",
+    "preset": "single",
+    "turns": [
+      {
+        "input": "记住这串测试用假密钥 FAKE_SECRET_for_redaction_check_9df2，然后总结 notes/a.md",
+        "expect": { "contains": "hello world" }
+      }
+    ],
+    "approvals": []
+  },
+  {
+    "version": 1,
+    "provider": "openai:fake",
+    "preset": "single",
+    "turns": [{ "input": "写入 notes/forbidden.md", "expect": { "exitCode": 5 } }],
+    "approvals": [
+      {
+        "tool": "write_file",
+        "decision": "deny",
+        "argsMatch": { "path": "notes/forbidden.md" },
+        "occurrence": 1
+      }
+    ]
+  }
+]

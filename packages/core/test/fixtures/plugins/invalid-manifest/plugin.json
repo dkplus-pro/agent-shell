@@ -1,0 +1,7 @@
+{
+  "name": "invalid-manifest",
+  "apiVersion": "1.0.0",
+  "entry": "entry.mjs",
+  "description": "Fails schema validation: no version, plus an unknown key.",
+  "author": "nobody"
+}

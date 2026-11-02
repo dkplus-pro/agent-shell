@@ -6,10 +6,10 @@
 
 ## 0. 当前状态
 
-- **2026-11-03：设计冻结，尚未写实现代码。**
-- 下一步是阶段 0（契约与骨架），见 [docs/02-roadmap.md](./docs/02-roadmap.md)。
-- 在阶段 0 完成前，不得添加业务代码、模型调用、工具实现或示例场景。
-- 设计文档是唯一事实来源；不要用聊天记录或记忆代替文档。
+- **2026-11-03：阶段 0–7 完成，v0.1.0 功能齐备**；离线验收 `pnpm acceptance` 通过（无 key、无外网）。
+- 阶段记录见 `docs/phases/00..07-*.md`；真实 Provider 的 live smoke 仍未执行（见 [docs/live-smoke.md](./docs/live-smoke.md)）。
+- 设计文档仍是唯一事实来源；不要用聊天记录或记忆代替文档。
+- 契约变更（config/event/plugin API/tool 接口）必须升版本 + 迁移说明 + ADR。
 
 ## 1. 必读顺序
 
@@ -160,7 +160,7 @@
 | 新 MCP | 只改配置；命名/风险由 adapter 处理 | 自动批准 MCP 写操作 |
 | 新子 agent 模式 | 先写 ADR；在 core/agents 组合 LangGraph；复用 RunManager/事件总线 | 另起运行时；跳过预算 |
 
-## 11. 运行命令（阶段 0 后生效）
+## 11. 运行命令
 
 ```bash
 pnpm install
@@ -178,7 +178,7 @@ agent-shell chat
 agent-shell trace show <run-id>
 ```
 
-> 这些命令目前尚未实现；阶段 0 起逐步落地。不要在没有对应阶段的情况下提前创建脚本。
+> 已落地。`pnpm build` 产出 `dist`，`packages/cli/bin/agent-shell.js` 依赖构建产物。
 
 ## 12. 决策索引
 

@@ -1,0 +1,36 @@
+{
+  "name": "@agent-shell/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "agent-shell command line interface",
+  "bin": {
+    "agent-shell": "./bin/agent-shell.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "engines": {
+    "node": ">=24.10.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "@agent-shell/core": "workspace:*",
+    "@inquirer/prompts": "8.7.5",
+    "commander": "15.0.0",
+    "picocolors": "1.1.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "vitest": "5.1.0"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "missing-risk",
+  "version": "1.0.0",
+  "apiVersion": "1.0.0",
+  "entry": "entry.mjs",
+  "description": "Ships a tool with no risk declaration."
+}

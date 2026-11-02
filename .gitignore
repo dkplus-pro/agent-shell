@@ -1,0 +1,16 @@
+node_modules/
+dist/
+coverage/
+.agent-shell/
+*.sqlite
+*.sqlite-*
+*.jsonl
+.env
+.env.*
+!.env.example
+.DS_Store
+tmp/
+.tmp-*/
+examples/file-agent/.agent-shell/
+tooling/acceptance/.tmp-*/
+

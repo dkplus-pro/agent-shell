@@ -1,0 +1,7 @@
+{
+  "name": "word-count",
+  "version": "1.0.0",
+  "apiVersion": "1.0.0",
+  "entry": "entry.mjs",
+  "description": "Counts the words in a block of text."
+}
